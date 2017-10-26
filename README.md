@@ -17,14 +17,14 @@ To help with the setup of this project, you are provided with a vagrantfile
 and two SQL scripts to set up the environment as intended for this project.  
 
 Before you start:
-Go to the [Google API Console] (https://console.developers.google.com) and click "Credentials", then "Create Credentials", then "OAuth Client ID". This will bring you to a new screen fill in with:
+Go to the [Google API Console](https://console.developers.google.com) and click "Credentials", then "Create Credentials", then "OAuth Client ID". This will bring you to a new screen fill in with:
 
 1. Choose "Web application"
 2. Project name can be whatever you want
 3. Authorization Javascript origins: http://localhost:8080
 4. Aurthorize Redirect URIs: 
 
-	http://localhost:8080/category/
+	http://localhost:8080/category/ <br>
 	http://localhost:8080/category/*
 	
 5. Then download the JSON file after saving and move it into the catalog folder and name it "client_secret.json"
