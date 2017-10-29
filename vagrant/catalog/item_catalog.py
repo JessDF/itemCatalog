@@ -59,7 +59,6 @@ def showItem(category_id, item_id):
     createSession()
     categories = db.getListOfCategories()
     item = db.getItemBy(item_id)
-    print(uploaded_file(item[0].image_url))
     return render_template('item.html',
                            categories=categories,
                            item=item,
@@ -85,13 +84,10 @@ def addItemToCategory(category_id):
         if request.method == 'POST':
             if checkIfClientAuthorizedWith(request.form['state']) is False:
                 return responseWith('Invalid authorization paramaters.', 401)
-            print ('Trying to upload file.')
             file = request.files['file']
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                print ('Trying to save file')
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                print ('File upload complete')
                 new_item = Item(name=request.form['name'],
                                 image_url=filename,
                                 description=request.form['description'],
@@ -111,6 +107,7 @@ def addItemToCategory(category_id):
 
 @app.route('/category/<int:category_id>/editItem/<int:item_id>/', methods=['GET', 'POST'])
 def editItem(category_id, item_id):
+	#user unable to see edit if didn't create item
     if 'name' not in session:
         return redirect(url_for('showCategories'))
 
@@ -125,7 +122,6 @@ def editItem(category_id, item_id):
 
         if request.form['description']:
             item_to_edit[0].description = request.form['description']
-        print ('Checking to see if we have a new file.')
         if request.files['file']:
             file = request.files['file']
             if file and allowed_file(file.filename):
@@ -150,6 +146,7 @@ def editItem(category_id, item_id):
 
 @app.route('/category/<int:category_id>/deleteItem/<int:item_id>/', methods=['GET', 'POST'])
 def deleteItem(category_id, item_id):
+	#unable to see delete button if user didn't add item
     if 'name' not in session:
         return redirect(url_for('showCategories'))
 
@@ -262,7 +259,6 @@ def getUserInfoAndCreateSession():
     session['picture'] = data['picture']
     session['email'] = data['email']
     session['user_id'] = db.getUserBy(session).id
-    print (session.get('access_token'))
     return responseWith('User successfully connected.', 200)
 
 
