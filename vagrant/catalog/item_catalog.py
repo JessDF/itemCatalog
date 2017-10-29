@@ -107,7 +107,7 @@ def addItemToCategory(category_id):
 
 @app.route('/category/<int:category_id>/editItem/<int:item_id>/', methods=['GET', 'POST'])
 def editItem(category_id, item_id):
-	#user unable to see edit if didn't create item
+    #User unable to see edit if didn't create item
     if 'name' not in session:
         return redirect(url_for('showCategories'))
 
@@ -146,7 +146,7 @@ def editItem(category_id, item_id):
 
 @app.route('/category/<int:category_id>/deleteItem/<int:item_id>/', methods=['GET', 'POST'])
 def deleteItem(category_id, item_id):
-	#unable to see delete button if user didn't add item
+    #Unable to see delete button if user didn't add item
     if 'name' not in session:
         return redirect(url_for('showCategories'))
 
