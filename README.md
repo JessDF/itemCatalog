@@ -1,6 +1,6 @@
 # Item Catalog
 
-Udacity Fullstack Web Development Nanodegree
+Udacity Fullstack Web Development Nanodegree Program - Project 6: Item Catalog
 
 ## You may need to run these commands:
 
